@@ -1,5 +1,4 @@
-#bin/sh
-
+#!/bin/zsh
 function git-commit--select-prefix() {
   #TODO: tomlから選択できるprefixを読み込むようにする
   prefixes=(
