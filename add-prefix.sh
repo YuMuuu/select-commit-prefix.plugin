@@ -14,5 +14,4 @@ prefixes=(
   "style"
   "test"
 )
-
-printf "%s\n" "${prefixes[@]}" | peco | xargs -o -IPREFIX git commit -m PREFIX: -e
+printf "%s\n" "${prefixes[@]}" | peco | xargs -o -IPREFIX git commit -m "PREFIX: " -e
