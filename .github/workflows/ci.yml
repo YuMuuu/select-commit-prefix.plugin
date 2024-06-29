@@ -8,15 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.pull_request.base.sha }}
-    - uses: actions/checkout@v3
     - name: Check scripts with shellcheck
-      env:
-        EXCLUDE_OPTS: SC2086,SC2001
-      run: |
-        git diff ${{ github.event.pull_request.base.sha }}.. \
-          --diff-filter=AM --name-only -- '*.zsh' | while read script ; do \
-            shellcheck ${EXCLUDE_OPTS:+-e ${EXCLUDE_OPTS}} $script || touch error ; \
-        done
-        test ! -e error
+      run: shellcheck zsh-select-commit-prefix/zsh-select-commit-prefix.plugin.zsh
