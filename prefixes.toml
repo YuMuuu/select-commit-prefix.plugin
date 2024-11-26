@@ -1,0 +1,43 @@
+[[prefixes]]
+key = "build"
+description = "Changes that affect the build system or external dependencies (e.g., updating dependencies, modifying build scripts)"
+
+[[prefixes]]
+key = "chore"
+description = "Changes to the build process or auxiliary tools and libraries such as documentation generation"
+
+[[prefixes]]
+key = "ci"
+description = "Changes to CI configuration files and scripts"
+
+[[prefixes]]
+key = "docs"
+description = "Documentation only changes"
+
+[[prefixes]]
+key = "feat"
+description = "A new feature"
+
+[[prefixes]]
+key = "fix"
+description = "A bug fix"
+
+[[prefixes]]
+key = "perf"
+description = "A code change that improves performance"
+
+[[prefixes]]
+key = "refactor"
+description = "A code change that neither fixes a bug nor adds a feature"
+
+[[prefixes]]
+key = "revert"
+description = "Reverts a previous commit"
+
+[[prefixes]]
+key = "style"
+description = "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)"
+
+[[prefixes]]
+key = "test"
+description = "Adding missing or correcting existing tests"
