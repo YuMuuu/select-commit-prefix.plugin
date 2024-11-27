@@ -1,11 +1,15 @@
 #!/bin/zsh
 function git-commit--select-prefix() {
-  export XDG_DATA_HOME=$HOME/.local/share
-  local toml_file=$XDG_DATA_HOME/sheldon/repos/github.com/YuMuuu/zsh-select-commit-prefix/prefixes.toml
+  local toml_file=$HOME/.local/share/sheldon/repos/github.com/YuMuuu/zsh-select-commit-prefix/prefixes.toml
   local choices=()
   local prefix=""
   local description=""
 
+  if [[ -f "$GIT_COMMIT_SELECT_PREFIX_TOML_FILE" ]]; then
+    toml_file=$GIT_COMMIT_SELECT_PREFIX_TOML_FILE 
+  else
+    toml_file=$HOME/.local/share/sheldon/repos/github.com/YuMuuu/zsh-select-commit-prefix/prefixes.toml
+  fi
 
   if [[ -f "$toml_file" ]]; then
     keys=($(dasel -f "$toml_file" -r toml '.prefixes.all().key' 2>/dev/null ))
