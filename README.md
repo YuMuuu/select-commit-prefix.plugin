@@ -8,6 +8,7 @@
 
 - git
 - peco
+- dasel
 
 ## Installation
 
@@ -35,3 +36,7 @@ git-commit--select-prefix
 ### emacs の場合
 
 WIP
+
+## Reference
+
+- https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#type

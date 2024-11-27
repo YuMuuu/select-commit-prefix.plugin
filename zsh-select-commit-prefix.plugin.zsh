@@ -1,33 +1,40 @@
 #!/bin/zsh
 function git-commit--select-prefix() {
-  #TODO: tomlから選択できるprefixを読み込むようにする
-  prefixes=(
-    "build"
-    "chore"
-    "ci"
-    "docs"
-    "feat"
-    "fix"
-    "perf"
-    "refactor"
-    "revert"
-    "style"
-    "test"
-  )
-  printf "%s\n" "${prefixes[@]}" | peco | xargs -o -IPREFIX git commit -m "PREFIX: " -e
+  local toml_file=$HOME/.local/share/sheldon/repos/github.com/YuMuuu/zsh-select-commit-prefix/prefixes.toml
+  local choices=()
+  local prefix=""
+  local description=""
+
+  if [[ -f "$GIT_COMMIT_SELECT_PREFIX_TOML_FILE" ]]; then
+    toml_file=$GIT_COMMIT_SELECT_PREFIX_TOML_FILE 
+  else
+    toml_file=$HOME/.local/share/sheldon/repos/github.com/YuMuuu/zsh-select-commit-prefix/prefixes.toml
+  fi
+
+  if [[ -f "$toml_file" ]]; then
+    keys=($(dasel -f "$toml_file" -r toml '.prefixes.all().key' 2>/dev/null ))
+    descriptions=$(dasel -f "$toml_file" -r toml '.prefixes.all().description' 2>/dev/null)
+    descriptions_array=()
+    while IFS= read -r line; do
+      descriptions_array+=("$line")
+    done <<< "$descriptions"
+
+    choices=()
+    for ((i=0; i<${#keys[@]}; i++)); do
+      choices+=("${keys[i]}: ${descriptions_array[i]}")
+    done
+  fi
+
+  if [[ -z "${choices[0]}" ]]; then
+      choices=("${choices[@]:1}")
+  fi
+
+  choices=("${choices[@]//\'/}")
+
+  local selected=$(printf "%s\n" "${choices[@]}" | peco)
+  prefix=${selected%%:*}
+
+  git commit -e -m "${prefix}: "
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 zle -N git-commit--select-prefix
